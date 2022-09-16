@@ -1,0 +1,10 @@
+- name: install kafka
+  ansible.builtin.yum:
+    name: kafka-server
+    state: latest
+
+#- name: Enable Kafka
+#  ansible.builtin.systemd:
+#    name: zookeeper-server
+#    state: restarted
+#    enabled: yes
