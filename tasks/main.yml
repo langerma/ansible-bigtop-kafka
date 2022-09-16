@@ -3,8 +3,15 @@
     name: kafka-server
     state: latest
 
-#- name: Enable Kafka
-#  ansible.builtin.systemd:
-#    name: zookeeper-server
-#    state: restarted
-#    enabled: yes
+- name: Configure kafka server.properties
+  ansible.builtin.template:
+    src: server.properties.j2
+    dest: "/etc/kafka/conf/server.properties"
+  notify:
+    - Restart kafka
+
+- name: Enable Kafka
+  ansible.builtin.systemd:
+    name: kafka-server
+    state: restarted
+    enabled: yes
